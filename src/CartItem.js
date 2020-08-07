@@ -20,9 +20,10 @@ class CartItem extends React.Component {
   }
 }
 
+
 const styles = {
   image: {
-    height: 110,
+    height: 120,
     width: 110,
     borderRadius: 4,
     background: '#ccc'
