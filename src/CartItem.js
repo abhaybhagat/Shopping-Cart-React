@@ -1,17 +1,14 @@
 import React from 'react';
 
 class CartItem extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      price: 999,
-      title: "Mobile Phone",
-      qty: 1,
-      img: "",
-    };
-  }
+  
   increaseQuantity = () => {
     console.log("this", this.state);
+    //set state form 1
+    // this.setState({
+    //   qty: this.state.qty + 1
+    // });
+    //setstate form 2 
     this.setState((prevState) => {
       return {
         qty: prevState.qty + 1,
@@ -19,6 +16,10 @@ class CartItem extends React.Component {
     });
   };
   decreaseQuantity = () => {
+    const { qty } = this.state;
+    if(qty == 0) {
+      return ; 
+    }
     console.log("this", this.state);
     this.setState((prevState) => {
       return {
@@ -27,11 +28,11 @@ class CartItem extends React.Component {
     });
   };
   render() {
-    const { price, title, qty } = this.state;
+    const { price, title, qty } = this.props.product;
     return (
       <div className="cart-item">
         <div className="left-block">
-          <img style={styles.image} alt="random" />
+          <img style={styles.image} />
         </div>
         <div className="right-block">
           <div style={{ fontSize: 25 }}>{title}</div>
@@ -43,13 +44,13 @@ class CartItem extends React.Component {
               alt="increase"
               className="action-icons"
               src="https://image.flaticon.com/icons/svg/992/992651.svg"
-              onClick={this.increaseQuantity}
+              onClick={() => this.props.onIncreaseQuantity(this.props.product)}
             />
             <img
               alt="decrease"
               className="action-icons"
               src="https://image.flaticon.com/icons/svg/1665/1665612.svg"
-              onClick={this.decreaseQuantity}
+              onClick={() => this.props.onDecreaseQuantity(this.props.product)}
             />
             <img
               alt="delete"
@@ -70,7 +71,7 @@ const styles = {
     height: 110,
     width: 110,
     borderRadius: 4,
-    background: '#ccc'
+    background : '#ccc'
   }
 }
 
