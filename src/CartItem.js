@@ -1,5 +1,6 @@
 import React from 'react';
-
+//This class can be changed to arrow function as there is no state defined
+//inside and hence class is not needed
 class CartItem extends React.Component {
   
   increaseQuantity = () => {
@@ -32,7 +33,7 @@ class CartItem extends React.Component {
     return (
       <div className="cart-item">
         <div className="left-block">
-          <img style={styles.image} />
+          <img style={styles.image}/>
         </div>
         <div className="right-block">
           <div style={{ fontSize: 25 }}>{title}</div>
@@ -44,6 +45,7 @@ class CartItem extends React.Component {
               alt="increase"
               className="action-icons"
               src="https://image.flaticon.com/icons/svg/992/992651.svg"
+              //Doubt : Can we not just directly call onIncreaseQuantity
               onClick={() => this.props.onIncreaseQuantity(this.props.product)}
             />
             <img
