@@ -1,35 +1,9 @@
 import React from 'react';
 //This class can be changed to arrow function as there is no state defined
 //inside and hence class is not needed
-class CartItem extends React.Component {
+const CartItem = (props) => {
   
-  increaseQuantity = () => {
-    console.log("this", this.state);
-    //set state form 1
-    // this.setState({
-    //   qty: this.state.qty + 1
-    // });
-    //setstate form 2 
-    this.setState((prevState) => {
-      return {
-        qty: prevState.qty + 1,
-      };
-    });
-  };
-  decreaseQuantity = () => {
-    const { qty } = this.state;
-    if(qty === 0) {
-      return ; 
-    }
-    console.log("this", this.state);
-    this.setState((prevState) => {
-      return {
-        qty: prevState.qty - 1,
-      };
-    });
-  };
-  render() {
-    const { price, title, qty } = this.props.product;
+    const { price, title, qty } = props.product;
     return (
       <div className="cart-item">
         <div className="left-block">
@@ -46,25 +20,25 @@ class CartItem extends React.Component {
               className="action-icons"
               src="https://image.flaticon.com/icons/svg/992/992651.svg"
               //Doubt : Can we not just directly call onIncreaseQuantity
-              onClick={() => this.props.onIncreaseQuantity(this.props.product)}
+              onClick={() => props.onIncreaseQuantity(props.product)}
             />
             <img
               alt="decrease"
               className="action-icons"
               src="https://image.flaticon.com/icons/svg/1665/1665612.svg"
-              onClick={() => this.props.onDecreaseQuantity(this.props.product)}
+              onClick={() => props.onDecreaseQuantity(props.product)}
             />
             <img
               alt="delete"
               className="action-icons"
               src="https://image.flaticon.com/icons/svg/1214/1214428.svg"
-              onClick={()=>this.props.onDelete(this.props.product.id)}
+              onClick={()=>props.onDelete(props.product.id)}
             />
           </div>
         </div>
       </div>
     );
-  }
+  
 }
 
 
