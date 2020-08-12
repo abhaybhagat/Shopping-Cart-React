@@ -17,7 +17,7 @@ class CartItem extends React.Component {
   };
   decreaseQuantity = () => {
     const { qty } = this.state;
-    if(qty == 0) {
+    if(qty === 0) {
       return ; 
     }
     console.log("this", this.state);
@@ -56,7 +56,7 @@ class CartItem extends React.Component {
               alt="delete"
               className="action-icons"
               src="https://image.flaticon.com/icons/svg/1214/1214428.svg"
-              onClick={this.increaseQuantity}
+              onClick={()=>this.props.onDelete(this.props.product.id)}
             />
           </div>
         </div>
