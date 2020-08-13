@@ -1,39 +1,37 @@
 import React from "react";
 import Cart from "./Cart";
 import Navbar from "./Navbar";
+import * as firebase from 'firebase';
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      products: [
-        {
-          price: 99,
-          title: "Watch",
-          qty: 1,
-          img:
-            "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=759&q=80",
-          id: 1,
-        },
-        {
-          price: 999,
-          title: "Mobile Phone",
-          qty: 10,
-          img:
-            "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80",
-          id: 2,
-        },
-        {
-          price: 999,
-          title: "Laptop",
-          qty: 4,
-          img:
-            "https://images.unsplash.com/photo-1593642532781-03e79bf5bec2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80",
-          id: 3,
-        },
-      ],
-    };
+      products: []
+    };  
   }
+  
+componentDidMount() {
+  firebase
+  .firestore()
+  .collection('products')
+  .get()
+  .then((snapshot) => {
+    console.log(snapshot);
+    snapshot.docs.map((doc)=> {
+      console.log(doc.data());
+    })
+    const products = snapshot.docs.map((doc) => {
+      const data = doc.data();
+      data['id'] = doc.id;
+      return data;
+    })
+    this.setState({
+      products : products
+    })
+  })
+}
+
   handleIncreaseQuantity = (product) => {
     console.log("Increase qty of ", product);
     const { products } = this.state;
@@ -79,6 +77,7 @@ class App extends React.Component {
 
      products.map((product) => {
        cartTotal = cartTotal + product.qty * product.price;
+       return '';
      })
      return cartTotal;
   }

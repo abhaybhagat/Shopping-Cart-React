@@ -7,7 +7,7 @@ const CartItem = (props) => {
     return (
       <div className="cart-item">
         <div className="left-block">
-          <img style={styles.image} src = {props.product.img} />
+          <img style= {styles.image} src = {props.product.img} />
         </div>
         <div className="right-block">
           <div style={{ fontSize: 25 }}>{title}</div>
@@ -20,11 +20,11 @@ const CartItem = (props) => {
               className="action-icons"
               src="https://image.flaticon.com/icons/svg/992/992651.svg"
               //Doubt : Can we not just directly call onIncreaseQuantity
-              onClick={() => props.onIncreaseQuantity(props.product)}
+              onClick={() => props.onIncreaseQuantity(props.product)} 
             />
             <img
               alt="decrease"
-              className="action-icons"
+              className="action-icons" 
               src="https://image.flaticon.com/icons/svg/1665/1665612.svg"
               onClick={() => props.onDecreaseQuantity(props.product)}
             />
